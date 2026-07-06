@@ -143,6 +143,35 @@
   letter-spacing: -0.5px;
 }
 
+/* Word type badge on flashcard */
+.card-word-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.card-body .word-type-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 8px;
+  letter-spacing: 0.3px;
+  text-transform: lowercase;
+}
+
+.word-type-badge.type-noun { background: rgba(79, 172, 254, 0.15); color: #4facfe; border: 1px solid rgba(79, 172, 254, 0.25); }
+.word-type-badge.type-verb { background: rgba(67, 233, 123, 0.15); color: #43e97b; border: 1px solid rgba(67, 233, 123, 0.25); }
+.word-type-badge.type-adjective { background: rgba(168, 131, 255, 0.15); color: #a883ff; border: 1px solid rgba(168, 131, 255, 0.25); }
+.word-type-badge.type-adverb { background: rgba(240, 147, 251, 0.15); color: #f093fb; border: 1px solid rgba(240, 147, 251, 0.25); }
+.word-type-badge.type-preposition { background: rgba(255, 166, 97, 0.15); color: #ffa661; border: 1px solid rgba(255, 166, 97, 0.25); }
+.word-type-badge.type-conjunction { background: rgba(255, 209, 102, 0.15); color: #ffd166; border: 1px solid rgba(255, 209, 102, 0.25); }
+.word-type-badge.type-pronoun { background: rgba(72, 219, 251, 0.15); color: #48dbfb; border: 1px solid rgba(72, 219, 251, 0.25); }
+.word-type-badge.type-interjection { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.25); }
+.word-type-badge.type-determiner { background: rgba(129, 236, 236, 0.15); color: #81ecec; border: 1px solid rgba(129, 236, 236, 0.25); }
+.word-type-badge.type-phrase { background: rgba(162, 155, 254, 0.15); color: #a29bfe; border: 1px solid rgba(162, 155, 254, 0.25); }
+
 .card-ipa {
   font-size: 18px;
   color: rgba(255, 255, 255, 0.5);

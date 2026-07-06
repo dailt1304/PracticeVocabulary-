@@ -36,7 +36,50 @@ const TopicDetail = () => {
   const [pronunciation, setPronunciation] = useState('');
   const [meaning, setMeaning] = useState('');
   const [exampleSentence, setExampleSentence] = useState('');
+  const [wordTypes, setWordTypes] = useState([]);
   const [saving, setSaving] = useState(false);
+
+  // Word type options
+  const wordTypeOptions = [
+    { value: 'noun', label: 'n', fullLabel: 'Danh từ' },
+    { value: 'verb', label: 'v', fullLabel: 'Động từ' },
+    { value: 'adjective', label: 'adj', fullLabel: 'Tính từ' },
+    { value: 'adverb', label: 'adv', fullLabel: 'Trạng từ' },
+    { value: 'preposition', label: 'prep', fullLabel: 'Giới từ' },
+    { value: 'conjunction', label: 'conj', fullLabel: 'Liên từ' },
+    { value: 'pronoun', label: 'pron', fullLabel: 'Đại từ' },
+    { value: 'interjection', label: 'interj', fullLabel: 'Thán từ' },
+    { value: 'determiner', label: 'det', fullLabel: 'Mạo từ' },
+    { value: 'phrase', label: 'phr', fullLabel: 'Cụm từ' },
+  ];
+
+  const toggleWordType = (type) => {
+    setWordTypes((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+  };
+
+  // Parse word_type string from DB to array
+  const parseWordTypes = (str) => {
+    if (!str) return [];
+    return str.split(',').map((s) => s.trim()).filter(Boolean);
+  };
+
+  const getWordTypeLabel = (type) => {
+    const map = {
+      noun: 'n',
+      verb: 'v',
+      adjective: 'adj',
+      adverb: 'adv',
+      preposition: 'prep',
+      conjunction: 'conj',
+      pronoun: 'pron',
+      interjection: 'interj',
+      determiner: 'det',
+      phrase: 'phr',
+    };
+    return map[type] || type;
+  };
 
   // Quick Import state
   const [importModalOpen, setImportModalOpen] = useState(false);
@@ -74,6 +117,7 @@ const TopicDetail = () => {
     setPronunciation('');
     setMeaning('');
     setExampleSentence('');
+    setWordTypes([]);
     setModalOpen(true);
   };
 
@@ -83,6 +127,7 @@ const TopicDetail = () => {
     setPronunciation(vocab.pronunciation || '');
     setMeaning(vocab.meaning);
     setExampleSentence(vocab.example_sentence || '');
+    setWordTypes(parseWordTypes(vocab.word_type));
     setModalOpen(true);
   };
 
@@ -99,6 +144,7 @@ const TopicDetail = () => {
           pronunciation: pronunciation.trim(),
           meaning: meaning.trim(),
           example_sentence: exampleSentence.trim(),
+          word_type: wordTypes.length > 0 ? wordTypes.join(',') : null,
         })
         .eq('id', editingVocab.id);
 
@@ -115,6 +161,7 @@ const TopicDetail = () => {
         pronunciation: pronunciation.trim(),
         meaning: meaning.trim(),
         example_sentence: exampleSentence.trim(),
+        word_type: wordTypes.length > 0 ? wordTypes.join(',') : null,
       });
 
       if (error) {
@@ -151,16 +198,22 @@ const TopicDetail = () => {
         let p = '';
         let m = '';
         let ex = '';
+        let wt = '';
 
         if (parts.length === 2) {
           m = parts[1].trim();
         } else if (parts.length === 3) {
           p = parts[1].trim();
           m = parts[2].trim();
-        } else {
+        } else if (parts.length === 4) {
           p = parts[1].trim();
           m = parts[2].trim();
           ex = parts[3].trim();
+        } else if (parts.length >= 5) {
+          p = parts[1].trim();
+          m = parts[2].trim();
+          ex = parts[3].trim();
+          wt = parts[4].trim().toLowerCase();
         }
 
         if (w && m) {
@@ -171,6 +224,7 @@ const TopicDetail = () => {
             pronunciation: p,
             meaning: m,
             example_sentence: ex,
+            word_type: wt || null,
           });
         }
       }
@@ -217,7 +271,7 @@ const TopicDetail = () => {
     }
 
     let csvContent = 'data:text/csv;charset=utf-8,\uFEFF';
-    csvContent += 'Từ vựng,Phiên âm,Nghĩa,Ví dụ\n';
+    csvContent += 'Từ vựng,Phiên âm,Nghĩa,Ví dụ,Loại từ\n';
 
     vocabulary.forEach((vocab) => {
       const escapeCsv = (text) => {
@@ -230,8 +284,9 @@ const TopicDetail = () => {
       const p = escapeCsv(vocab.pronunciation);
       const m = escapeCsv(vocab.meaning);
       const ex = escapeCsv(vocab.example_sentence);
+      const wt = escapeCsv(vocab.word_type);
 
-      csvContent += `${w},${p},${m},${ex}\n`;
+      csvContent += `${w},${p},${m},${ex},${wt}\n`;
     });
 
     const encodedUri = encodeURI(csvContent);
@@ -410,6 +465,11 @@ const TopicDetail = () => {
                 <div className="vocab-main">
                   <div className="vocab-word-row">
                     <h3 className="vocab-word">{vocab.word}</h3>
+                    {vocab.word_type && parseWordTypes(vocab.word_type).map((type) => (
+                      <span key={type} className={`word-type-badge type-${type}`}>
+                        {getWordTypeLabel(type)}
+                      </span>
+                    ))}
                     <button
                       className="speak-btn"
                       onClick={() => speakWord(vocab.word)}
@@ -492,6 +552,22 @@ const TopicDetail = () => {
           </div>
 
           <div className="form-group">
+            <label>Loại từ <span style={{ fontWeight: 400, color: 'rgba(255,255,255,0.4)', fontSize: '12px' }}>(chọn nhiều nếu cần)</span></label>
+            <div className="word-type-chips">
+              {wordTypeOptions.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  className={`word-type-chip type-${opt.value} ${wordTypes.includes(opt.value) ? 'active' : ''}`}
+                  onClick={() => toggleWordType(opt.value)}
+                >
+                  {opt.label} <span className="chip-full-label">{opt.fullLabel}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="form-group">
             <label>Câu ví dụ</label>
             <textarea
               placeholder="VD: We need to negotiate a better deal with the supplier."
@@ -545,8 +621,8 @@ const TopicDetail = () => {
           <div className="form-group">
             <label style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5', display: 'block', marginBottom: '10px' }}>
               Dán danh sách từ vựng vào đây. Định dạng mỗi dòng một từ:<br />
-              <code>Từ tiếng Anh | Nghĩa tiếng Việt</code> hoặc<br />
-              <code>Từ tiếng Anh | Phiên âm | Nghĩa tiếng Việt</code>
+              <code>Từ | Nghĩa</code> hoặc <code>Từ | Phiên âm | Nghĩa</code><br />
+              <code>Từ | Phiên âm | Nghĩa | Ví dụ | Loại từ</code>
             </label>
             <textarea
               placeholder="VD:&#10;negotiate | nɪˈɡoʊʃieɪt | đàm phán&#10;collaborate | hợp tác"

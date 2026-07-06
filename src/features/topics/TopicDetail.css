@@ -240,6 +240,128 @@
   margin-bottom: 8px;
 }
 
+/* Word type badge */
+.word-type-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+  text-transform: lowercase;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.word-type-badge.type-noun {
+  background: rgba(79, 172, 254, 0.15);
+  color: #4facfe;
+  border: 1px solid rgba(79, 172, 254, 0.25);
+}
+
+.word-type-badge.type-verb {
+  background: rgba(67, 233, 123, 0.15);
+  color: #43e97b;
+  border: 1px solid rgba(67, 233, 123, 0.25);
+}
+
+.word-type-badge.type-adjective {
+  background: rgba(168, 131, 255, 0.15);
+  color: #a883ff;
+  border: 1px solid rgba(168, 131, 255, 0.25);
+}
+
+.word-type-badge.type-adverb {
+  background: rgba(240, 147, 251, 0.15);
+  color: #f093fb;
+  border: 1px solid rgba(240, 147, 251, 0.25);
+}
+
+.word-type-badge.type-preposition {
+  background: rgba(255, 166, 97, 0.15);
+  color: #ffa661;
+  border: 1px solid rgba(255, 166, 97, 0.25);
+}
+
+.word-type-badge.type-conjunction {
+  background: rgba(255, 209, 102, 0.15);
+  color: #ffd166;
+  border: 1px solid rgba(255, 209, 102, 0.25);
+}
+
+.word-type-badge.type-pronoun {
+  background: rgba(72, 219, 251, 0.15);
+  color: #48dbfb;
+  border: 1px solid rgba(72, 219, 251, 0.25);
+}
+
+.word-type-badge.type-interjection {
+  background: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.25);
+}
+
+.word-type-badge.type-determiner {
+  background: rgba(129, 236, 236, 0.15);
+  color: #81ecec;
+  border: 1px solid rgba(129, 236, 236, 0.25);
+}
+
+.word-type-badge.type-phrase {
+  background: rgba(162, 155, 254, 0.15);
+  color: #a29bfe;
+  border: 1px solid rgba(162, 155, 254, 0.25);
+}
+
+/* Word type multi-select chips */
+.word-type-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.word-type-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.word-type-chip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.chip-full-label {
+  font-weight: 400;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Active chip states - match badge colors */
+.word-type-chip.type-noun.active { background: rgba(79, 172, 254, 0.15); color: #4facfe; border-color: rgba(79, 172, 254, 0.35); }
+.word-type-chip.type-verb.active { background: rgba(67, 233, 123, 0.15); color: #43e97b; border-color: rgba(67, 233, 123, 0.35); }
+.word-type-chip.type-adjective.active { background: rgba(168, 131, 255, 0.15); color: #a883ff; border-color: rgba(168, 131, 255, 0.35); }
+.word-type-chip.type-adverb.active { background: rgba(240, 147, 251, 0.15); color: #f093fb; border-color: rgba(240, 147, 251, 0.35); }
+.word-type-chip.type-preposition.active { background: rgba(255, 166, 97, 0.15); color: #ffa661; border-color: rgba(255, 166, 97, 0.35); }
+.word-type-chip.type-conjunction.active { background: rgba(255, 209, 102, 0.15); color: #ffd166; border-color: rgba(255, 209, 102, 0.35); }
+.word-type-chip.type-pronoun.active { background: rgba(72, 219, 251, 0.15); color: #48dbfb; border-color: rgba(72, 219, 251, 0.35); }
+.word-type-chip.type-interjection.active { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; border-color: rgba(255, 107, 107, 0.35); }
+.word-type-chip.type-determiner.active { background: rgba(129, 236, 236, 0.15); color: #81ecec; border-color: rgba(129, 236, 236, 0.35); }
+.word-type-chip.type-phrase.active { background: rgba(162, 155, 254, 0.15); color: #a29bfe; border-color: rgba(162, 155, 254, 0.35); }
+
+.word-type-chip.active .chip-full-label {
+  opacity: 1;
+}
+
 .vocab-meaning {
   font-size: 15px;
   color: rgba(255, 255, 255, 0.75);

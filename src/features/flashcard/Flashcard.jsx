@@ -16,6 +16,22 @@ import {
 } from 'react-icons/fi';
 import './Flashcard.css';
 
+const getWordTypeLabel = (type) => {
+  const map = {
+    noun: 'n',
+    verb: 'v',
+    adjective: 'adj',
+    adverb: 'adv',
+    preposition: 'prep',
+    conjunction: 'conj',
+    pronoun: 'pron',
+    interjection: 'interj',
+    determiner: 'det',
+    phrase: 'phr',
+  };
+  return map[type] || type;
+};
+
 const Flashcard = () => {
   const { id } = useParams(); // Topic ID
   const { user, profile, updateSessionResults } = useAuth();
@@ -210,6 +226,15 @@ const Flashcard = () => {
                 <div className="card-hint-top">NHẤP VÀO ĐỂ LẬT THẺ</div>
                 <div className="card-body">
                   <h2 className="card-word">{currentVocab?.word}</h2>
+                  {currentVocab?.word_type && (
+                    <div className="card-word-types">
+                      {currentVocab.word_type.split(',').map((t) => t.trim()).filter(Boolean).map((type) => (
+                        <span key={type} className={`word-type-badge type-${type}`}>
+                          {getWordTypeLabel(type)}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   {currentVocab?.pronunciation && (
                     <p className="card-ipa">/{currentVocab.pronunciation}/</p>
                   )}
