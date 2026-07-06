@@ -1,0 +1,433 @@
+/* ============================================
+   FLASHCARD STYLES
+   ============================================ */
+
+.flashcard-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.flashcard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.flashcard-header .back-btn {
+  margin-bottom: 0;
+}
+
+.topic-badge {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Progress indicator */
+.flashcard-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  align-self: flex-end;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* 3D Flip Card */
+.card-wrapper {
+  perspective: 1200px;
+  width: 100%;
+  height: 380px;
+  margin-bottom: 36px;
+  cursor: pointer;
+}
+
+.flash-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flash-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-front {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.card-back {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transform: rotateY(180deg);
+  border-color: rgba(102, 126, 234, 0.25);
+}
+
+.card-hint-top {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+
+.card-word {
+  font-size: 42px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.card-ipa {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  margin: 0 0 24px 0;
+}
+
+.card-audio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-audio-btn:hover {
+  background: #667eea;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.card-meaning {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 24px 0;
+}
+
+.card-example-box {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 16px;
+  border-left: 4px solid #667eea;
+  text-align: left;
+}
+
+.example-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.card-example-text {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.card-instruction {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-instruction strong {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Action Buttons */
+.flashcard-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 450px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.action-btn-learn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.action-btn-learn.need-review {
+  background: linear-gradient(135deg, #f5576c, #f093fb);
+  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.25);
+}
+
+.action-btn-learn.mastered {
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+  box-shadow: 0 6px 20px rgba(67, 233, 123, 0.25);
+  color: #1a3a2a;
+}
+
+.action-btn-learn.mastered svg {
+  stroke: #1a3a2a;
+  stroke-width: 2.5px;
+}
+
+/* Finished screen */
+.finished-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 48px 32px;
+  text-align: center;
+  max-width: 500px;
+  margin: 40px auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.finished-badge-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.finished-card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.finished-card p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 32px 0;
+}
+
+.finish-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.finish-stat-box {
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid transparent;
+}
+
+.finish-stat-box.green {
+  background: rgba(67, 233, 123, 0.06);
+  border-color: rgba(67, 233, 123, 0.12);
+}
+
+.finish-stat-box.orange {
+  background: rgba(255, 152, 0, 0.06);
+  border-color: rgba(255, 152, 0, 0.12);
+}
+
+.finish-stat-box.xp {
+  background: rgba(102, 126, 234, 0.08);
+  border-color: rgba(102, 126, 234, 0.15);
+}
+
+.finish-stat-box .num {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.finish-stat-box.green .num {
+  color: #43e97b;
+}
+
+.finish-stat-box.orange .num {
+  color: #ff9800;
+}
+
+.finish-stat-box.xp .num {
+  color: #667eea;
+}
+
+.finish-stat-box .lbl {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+}
+
+.finished-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-primary-finish {
+  padding: 15px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 14px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary-finish:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary-finish {
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-secondary-finish:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* Loading */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  color: rgba(255, 255, 255, 0.5);
+  gap: 16px;
+  flex: 1;
+}
+
+@media (max-width: 480px) {
+  .flashcard-page {
+    padding: 20px 16px;
+  }
+
+  .card-wrapper {
+    height: 340px;
+  }
+
+  .card-word {
+    font-size: 32px;
+  }
+
+  .card-meaning {
+    font-size: 22px;
+  }
+
+  .flashcard-actions {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .finish-stats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}

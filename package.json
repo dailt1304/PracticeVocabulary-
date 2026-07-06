@@ -1,0 +1,24 @@
+{
+  "name": "practicevocabulary",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.110.0",
+    "canvas-confetti": "^1.9.4",
+    "framer-motion": "^12.42.2",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.7.0",
+    "react-router-dom": "^7.18.1",
+    "recharts": "^3.9.2"
+  }
+}
